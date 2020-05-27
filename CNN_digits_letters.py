@@ -99,7 +99,7 @@ def display_sample(num, sample="Prediction"):
         # Reshape the 768 values to a 28x28 image
         image = x_train[num].reshape([28,28])
         # Plot image with sample, number and label
-        plt.title('%s #%d – Label: %s' % (sample, num, label))
+        plt.title('%s #%d\nLabel: %s' % (sample, num, label))
         plt.imshow(image, cmap=plt.get_cmap('gray_r'))
         plt.show()
     else:
@@ -109,13 +109,15 @@ def display_sample(num, sample="Prediction"):
         image = x_test[num].reshape([28, 28])
         # Get string character prediction
         pred = predictions_chars[num]
+        # Get corresponding probability of prediction
+        prob = str(round(max(predictions_probs[num])*100,3))+"%"
         # Plot image with sample, number, true label and prediction
         fig = plt.figure()
         if label==pred:
             fig.patch.set_facecolor('xkcd:green')
         else:
             fig.patch.set_facecolor('xkcd:crimson')
-        plt.title('%s #%d – Label: %s, Prediction: %s' % (sample, num, label, pred))
+        plt.title('%s #%d\nLabel: %s – Prediction: %s (%s)' % (sample, num, label, pred, prob))
         plt.imshow(image, cmap=plt.get_cmap('gray_r'))
         plt.show()
 
